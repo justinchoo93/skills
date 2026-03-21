@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Loop"
+  short_description: "Schedule recurring local Codex jobs"
+  default_prompt: "Use $codex-loop 5m \"check the deploy\" to create a recurring local job, or $codex-loop 5m \"use $bitbucket-pipeline-watch for PR 813\" to loop another skill in the current session."
