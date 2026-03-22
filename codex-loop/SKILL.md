@@ -35,6 +35,17 @@ The dispatcher runs every minute and launches due jobs. Jobs can be:
 
 For format details, read [references/job-format.md](references/job-format.md).
 
+## Locating the scripts
+
+The backing scripts live in the `scripts/` directory adjacent to this SKILL.md. Before running any command, resolve the absolute path to this skill's directory — referred to as `SKILL_DIR` below.
+
+```bash
+# Example: if this SKILL.md is at ~/.claude/skills/codex-loop/SKILL.md,
+# then SKILL_DIR=~/.claude/skills/codex-loop
+# If at ~/.codex/skills/codex-loop/SKILL.md,
+# then SKILL_DIR=~/.codex/skills/codex-loop
+```
+
 ## Core workflow
 
 The intended UX is Claude-like:
@@ -47,7 +58,7 @@ The intended UX is Claude-like:
 The backing entrypoint is:
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py ...
+python3 SKILL_DIR/scripts/loop.py ...
 ```
 
 ### Create a recurring job
@@ -55,7 +66,7 @@ python3 ~/.codex/skills/codex-loop/scripts/loop.py ...
 For a Codex prompt loop:
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py \
+python3 SKILL_DIR/scripts/loop.py \
   5m \
   "check the deploy status and summarize anything new"
 ```
@@ -63,7 +74,7 @@ python3 ~/.codex/skills/codex-loop/scripts/loop.py \
 For a plain shell command:
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py \
+python3 SKILL_DIR/scripts/loop.py \
   15m \
   --command "bundle exec rspec spec/models/user_spec.rb"
 ```
@@ -78,7 +89,7 @@ Important defaults:
 Optional prompt-job override:
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py \
+python3 SKILL_DIR/scripts/loop.py \
   5m \
   --session-id 019cf751-c874-7211-9ebe-797b5a8ab9b7 \
   "use \$bitbucket-pipeline-watch for PR 813 in this repo"
@@ -89,13 +100,13 @@ This is the intended chaining model for future watcher skills: `codex-loop` sche
 ### List jobs
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py list
+python3 SKILL_DIR/scripts/loop.py list
 ```
 
 ### Cancel a job
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py cancel <job_id>
+python3 SKILL_DIR/scripts/loop.py cancel <job_id>
 ```
 
 If the cancelled job is the last active job, the dispatcher cron entry is removed.
@@ -103,7 +114,7 @@ If the cancelled job is the last active job, the dispatcher cron entry is remove
 ### Inspect logs
 
 ```bash
-python3 ~/.codex/skills/codex-loop/scripts/loop.py logs <job_id>
+python3 SKILL_DIR/scripts/loop.py logs <job_id>
 ```
 
 ## How Codex should use this skill
@@ -112,7 +123,7 @@ When the user asks for loop behavior, prefer this translation:
 - user: `$codex-loop 5m check PR 813`
 - run:
   ```bash
-  python3 ~/.codex/skills/codex-loop/scripts/loop.py 5m "check PR 813"
+  python3 SKILL_DIR/scripts/loop.py 5m "check PR 813"
   ```
 
 For management requests:

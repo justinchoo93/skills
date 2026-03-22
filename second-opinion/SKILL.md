@@ -1,5 +1,5 @@
 ---
-name: Second Opinion
+name: second-opinion
 description: Get a second opinion from another AI agent on the current conversation. Consults codex, claude, or gemini headlessly with full context. Use when you or the user want to cross-check an approach, verify a suggestion, or get an independent perspective. Usage (Claude Code) - /second-opinion [agent] [question]
 ---
 
