@@ -10,7 +10,9 @@ import shutil
 import subprocess
 import sys
 import tempfile
-from datetime import UTC, datetime, timedelta
+from datetime import datetime, timedelta, timezone
+
+UTC = timezone.utc
 from pathlib import Path
 from typing import Any, Dict, List
 
