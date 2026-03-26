@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write AGENTS.md"
+  short_description: "Create concise repo AGENTS.md files"
+  default_prompt: "Use $write-agents-md to create or update AGENTS.md and sibling CLAUDE.md for this repository."
